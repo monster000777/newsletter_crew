@@ -1,0 +1,13 @@
+[project]
+name = "newsletter-crew"
+version = "0.1.0"
+description = "AI News Newsletter Crew"
+requires-python = ">=3.10"
+dependencies = [
+    "crewai>=1.0.0",
+    "crewai-tools>=1.0.0",
+    "langchain-openai>=0.0.5",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.crewai]

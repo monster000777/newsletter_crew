@@ -1,0 +1,32 @@
+# Environment
+.env
+.venv/
+
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# CrewAI specific
+.venv/Lib/site-packages/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output
+newsletter_output.md
+
+# Logs
+*.log
