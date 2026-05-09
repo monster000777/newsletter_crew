@@ -2,7 +2,7 @@ from crewai import Crew, Process
 from src.newsletter_crew.agents import NewsletterAgents
 from src.newsletter_crew.tasks import NewsletterTasks
 
-def get_crew():
+def create_crew():
     agents = NewsletterAgents()
     tasks = NewsletterTasks(agents)
 
@@ -20,5 +20,3 @@ def get_crew():
         process=Process.sequential,
         verbose=True
     )
-
-crew = get_crew()
