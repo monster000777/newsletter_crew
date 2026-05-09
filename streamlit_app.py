@@ -26,19 +26,23 @@ if st.button("🚀 生成简报", type="primary", use_container_width=True):
             st.session_state.result = None
             st.session_state.error = None
 
-            progress_bar = st.progress(0, text="初始化...")
+            progress_bar = st.progress(0, text="准备中...")
 
-            progress_bar.progress(10, text="🔍 研究员正在搜索新闻...")
-            progress_bar.progress(40, text="✍️ 作家正在撰写...")
-
+            # Stage 1: Researcher
+            progress_bar.progress(20, text="🔍 研究员搜索新闻...")
             crew = create_crew()
+
+            # Stage 2: Writing
+            progress_bar.progress(50, text="✍️ 作家撰写摘要...")
+
+            # Stage 3: Review
+            progress_bar.progress(75, text="✅ 审核员审核中...")
+
             result = crew.kickoff(inputs={"topic": topic})
 
-            progress_bar.progress(80, text="✅ 审核员正在审核...")
-
-            st.session_state.result = str(result)
             progress_bar.progress(100, text="完成！")
 
+            st.session_state.result = str(result)
             st.success("🎉 简报生成完成！")
 
         except Exception as e:

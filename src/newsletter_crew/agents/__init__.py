@@ -2,9 +2,16 @@ from crewai import Agent
 from crewai_tools import SerperDevTool
 from src.newsletter_crew.config import OPENAI_MODEL, SERPER_API_KEY
 
-search_tool = SerperDevTool(api_key=SERPER_API_KEY) if SERPER_API_KEY else None
-
 class NewsletterAgents:
+    def __init__(self):
+        self._search_tool = None
+
+    @property
+    def search_tool(self):
+        if self._search_tool is None and SERPER_API_KEY:
+            self._search_tool = SerperDevTool(api_key=SERPER_API_KEY)
+        return self._search_tool
+
     def researcher(self):
         agent_config = {
             "role": "Senior Market Researcher",
@@ -13,8 +20,8 @@ class NewsletterAgents:
             "llm": OPENAI_MODEL,
             "verbose": True
         }
-        if search_tool:
-            agent_config["tools"] = [search_tool]
+        if self.search_tool:
+            agent_config["tools"] = [self.search_tool]
         return Agent(**agent_config)
 
     def writer(self):
