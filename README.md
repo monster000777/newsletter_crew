@@ -16,13 +16,15 @@ newsletter_crew/
 ├── main.py                           # CLI 入口
 ├── streamlit_app.py                  # 可视化界面
 ├── src/newsletter_crew/
-│   ├── config.py                     # 配置管理（统一）
-│   ├── agents/__init__.py            # Agent 定义
-│   ├── tasks/__init__.py             # Task 定义
-│   └── crew.py                       # Crew 配置
-├── .env                              # 环境变量
-├── .env.example                      # 环境变量模板
-└── uv.lock                           # 依赖锁定
+│   ├── config.py                    # 配置管理
+│   ├── agents/__init__.py           # Agent 定义
+│   ├── tasks/__init__.py            # Task 定义
+│   └── crew.py                      # Crew 配置
+├── .env                             # 环境变量
+├── .env.example                     # 环境变量模板
+├── pyproject.toml                   # 项目配置
+├── uv.lock                          # 依赖锁定
+└── LICENSE                          # MIT 许可
 ```
 
 ## 快速开始
@@ -55,23 +57,10 @@ uv run python main.py
 **可视化界面模式：**
 ```bash
 uv run streamlit run streamlit_app.py
+# 浏览器打开 http://localhost:8501
 ```
 
-## 可视化界面
-
-运行可视化界面：
-
-```bash
-uv run streamlit run streamlit_app.py
-```
-
-浏览器会自动打开 http://localhost:8501
-
-界面功能：
-- 输入新闻主题
-- 一键生成简报
-- 实时进度显示
-- 下载 Markdown 文件
+界面功能：输入主题、生成简报、下载 Markdown
 
 ## Agent 工作流程
 

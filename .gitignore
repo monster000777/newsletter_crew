@@ -12,9 +12,11 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.pytest_cache/
+htmlcov/
 
-# CrewAI specific
-.venv/Lib/site-packages/
+# Streamlit
+.streamlit/
 
 # IDE
 .vscode/
