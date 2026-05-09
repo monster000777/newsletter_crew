@@ -15,11 +15,15 @@
 newsletter_crew/
 ├── main.py                           # CLI 入口
 ├── streamlit_app.py                  # 可视化界面
+├── tests/
+│   └── test_runner.py                # 基础单元测试
 ├── src/newsletter_crew/
 │   ├── config.py                    # 配置管理
-│   ├── agents/__init__.py           # Agent 定义
-│   ├── tasks/__init__.py            # Task 定义
-│   └── crew.py                      # Crew 配置
+│   ├── agents.py                    # Agent 定义
+│   ├── tasks.py                     # Task 定义
+│   ├── crew.py                      # Crew 装配
+│   ├── runner.py                    # 共享运行逻辑
+│   └── __init__.py                  # 包入口
 ├── .env                             # 环境变量
 ├── .env.example                     # 环境变量模板
 ├── pyproject.toml                   # 项目配置
@@ -47,12 +51,20 @@ OPENAI_MODEL=gpt-4o
 SERPER_API_KEY=your-serper-api-key
 ```
 
+说明：
+- `OPENAI_BASE_URL` 用于 OpenAI 兼容接口地址
+- `SERPER_API_KEY` 可选；未配置时研究任务会降级为无实时搜索模式
+
 ### 3. 运行
 
 **命令行模式：**
 ```bash
 uv run python main.py
+uv run python main.py AI
+uv run python main.py 机器人
 ```
+
+默认主题为 `AI`。
 
 **可视化界面模式：**
 ```bash
@@ -61,6 +73,17 @@ uv run streamlit run streamlit_app.py
 ```
 
 界面功能：输入主题、生成简报、下载 Markdown
+
+### 4. 运行测试
+
+```bash
+uv run python -m unittest discover -s tests -p "test_*.py"
+```
+
+### 5. 输出文件
+
+- CLI 运行后会生成 `newsletter_output.md`
+- 该文件已在 `.gitignore` 中忽略
 
 ## Agent 工作流程
 

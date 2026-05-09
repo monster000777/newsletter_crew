@@ -1,6 +1,7 @@
 from crewai import Agent
 from crewai_tools import SerperDevTool
-from src.newsletter_crew.config import OPENAI_MODEL, SERPER_API_KEY
+
+from .config import OPENAI_MODEL, SERPER_API_KEY
 
 
 class NewsletterAgents:

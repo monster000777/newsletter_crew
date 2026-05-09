@@ -1,5 +1,9 @@
 import streamlit as st
-from src.newsletter_crew.crew import create_crew
+
+from src.newsletter_crew.runner import normalize_topic, run_newsletter
+
+
+DEFAULT_TOPIC = "AI"
 
 st.set_page_config(
     page_title="AI Newsletter Crew",
@@ -10,7 +14,7 @@ st.set_page_config(
 st.title("🤖 AI Newsletter Crew")
 st.markdown("---")
 
-topic = st.text_input("📰 输入新闻主题", value="AI", placeholder="例如：AI、人工智能、机器学习...")
+topic = st.text_input("📰 输入新闻主题", value=DEFAULT_TOPIC, placeholder="例如：AI、人工智能、机器学习...")
 
 if "result" not in st.session_state:
     st.session_state.result = None
@@ -20,17 +24,19 @@ if "error" not in st.session_state:
 
 if st.button("🚀 生成简报", type="primary", use_container_width=True):
     if not topic.strip():
+        st.session_state.result = None
+        st.session_state.error = None
         st.error("请输入新闻主题")
     else:
         try:
             st.session_state.result = None
             st.session_state.error = None
+            normalized_topic = normalize_topic(topic)
 
             progress_bar = st.progress(0, text="准备中...")
 
             # Stage 1: Researcher
             progress_bar.progress(20, text="🔍 研究员搜索新闻...")
-            crew = create_crew()
 
             # Stage 2: Writing
             progress_bar.progress(50, text="✍️ 作家撰写摘要...")
@@ -38,7 +44,7 @@ if st.button("🚀 生成简报", type="primary", use_container_width=True):
             # Stage 3: Review
             progress_bar.progress(75, text="✅ 审核员审核中...")
 
-            result = crew.kickoff(inputs={"topic": topic})
+            result = run_newsletter(normalized_topic)
 
             progress_bar.progress(100, text="完成！")
 
@@ -47,7 +53,6 @@ if st.button("🚀 生成简报", type="primary", use_container_width=True):
 
         except Exception as e:
             st.session_state.error = str(e)
-            st.error(f"生成失败：{e}")
 
 if st.session_state.error:
     st.error(f"错误：{st.session_state.error}")

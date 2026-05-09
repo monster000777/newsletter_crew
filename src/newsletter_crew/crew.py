@@ -1,6 +1,7 @@
 from crewai import Crew, Process
-from src.newsletter_crew.agents import NewsletterAgents
-from src.newsletter_crew.tasks import NewsletterTasks
+
+from .agents import NewsletterAgents
+from .tasks import NewsletterTasks
 
 
 def create_crew() -> Crew:
