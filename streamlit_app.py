@@ -57,18 +57,15 @@ if st.session_state.result:
     st.markdown("### 📋 生成的简报")
     st.markdown(st.session_state.result)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.download_button(
-            "📥 下载 Markdown",
-            st.session_state.result,
-            file_name="newsletter_output.md",
-            mime="text/markdown",
-            use_container_width=True
-        )
-    with col2:
-        st.code(st.session_state.result, language=None)
-        st.info("复制上方代码块中的内容")
+    st.download_button(
+        "📥 下载 Markdown",
+        st.session_state.result,
+        file_name="newsletter_output.md",
+        mime="text/markdown",
+        use_container_width=True
+    )
+    st.code(st.session_state.result, language=None)
+    st.info("复制上方代码块中的内容")
 
 st.markdown("---")
 st.caption("💡 由 AI Newsletter Crew 生成 | 基于 CrewAI")

@@ -13,21 +13,20 @@ class NewsletterAgents:
         return self._search_tool
 
     def researcher(self):
-        agent_config = {
-            "role": "Senior Market Researcher",
-            "goal": "Research and gather the latest and most important AI news and trends",
-            "backstory": "You work at a leading tech research firm. You are expert at finding the most relevant and trending news.",
-            "llm": OPENAI_MODEL,
-            "verbose": True
-        }
-        if self.search_tool:
-            agent_config["tools"] = [self.search_tool]
-        return Agent(**agent_config)
+        tools = [self.search_tool] if self.search_tool else []
+        return Agent(
+            role="Senior Market Researcher",
+            goal="Research and gather the latest and most important news and trends",
+            backstory="You work at a leading tech research firm. You are expert at finding the most relevant and trending news.",
+            llm=OPENAI_MODEL,
+            verbose=True,
+            tools=tools
+        )
 
     def writer(self):
         return Agent(
             role="Content Writer",
-            goal="Write a clear and engaging 300-word summary of the AI news",
+            goal="Write a clear and engaging summary of the research findings",
             backstory="You are an experienced tech journalist who writes clear and engaging summaries.",
             llm=OPENAI_MODEL,
             verbose=True,
