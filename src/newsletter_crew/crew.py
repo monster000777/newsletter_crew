@@ -2,7 +2,9 @@ from crewai import Crew, Process
 from src.newsletter_crew.agents import NewsletterAgents
 from src.newsletter_crew.tasks import NewsletterTasks
 
-def create_crew():
+
+def create_crew() -> Crew:
+    """创建并返回配置好的 Crew 实例"""
     agents = NewsletterAgents()
     tasks = NewsletterTasks(agents)
 
@@ -14,9 +16,9 @@ def create_crew():
         agents=[
             agents.researcher(),
             agents.writer(),
-            agents.reviewer()
+            agents.reviewer(),
         ],
         tasks=[research, write, review],
         process=Process.sequential,
-        verbose=True
+        verbose=True,
     )
